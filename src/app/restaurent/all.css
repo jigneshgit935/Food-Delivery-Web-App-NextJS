@@ -1,0 +1,35 @@
+.login-signup-design {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-signup-design h1 {
+    text-align: center;
+}
+
+
+.login-signup-div {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    box-shadow: 0px 0px 100px 3px #b2b2b2;
+    padding: 20px;
+}
+
+.sign-already {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-already h6 {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.sign-already span {
+    color: blue;
+    cursor: pointer;
+}
