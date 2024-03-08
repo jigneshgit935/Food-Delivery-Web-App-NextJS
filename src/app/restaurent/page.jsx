@@ -6,6 +6,7 @@ import SignUp from '../_components/SignUpComponent'
 import './all.css'
 import Header from '../_components/Header'
 import Footer from '../_components/Footer'
+import { ToastContainer } from 'react-toastify'
 const Restaurent = () => {
 
     const [login, setLogin] = useState(true)

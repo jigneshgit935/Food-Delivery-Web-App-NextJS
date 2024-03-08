@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import './Header.css'
 
+
+
 const Header = () => {
     const router = useRouter()
     const pathName = usePathname()
@@ -19,6 +21,7 @@ const Header = () => {
         }
         else if (data && pathName == "/restaurent") {
             router.push("/restaurent/dashboard")
+            
         }
         else {
             setDetails(JSON.parse(data))

@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import "./Login.css"
 import "./Signup.css"
 import { useRouter } from 'next/navigation'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const SignUp = () => {
@@ -15,20 +18,45 @@ const SignUp = () => {
     const [address, setAddress] = useState("")
     const [contact, setContact] = useState("")
 
+    const [error, setError] = useState(false)
+    const [passwordError, setPasswordError] = useState(false)
+
     const handleSignup = async () => {
 
-        let response = await fetch("http://localhost:3000/api/restaurents", {
-            method: "POST",
-            body: JSON.stringify({ email, password, confirmPassword, restaurantName, city, address, contact })
-        })
-        response = await response.json()
-        console.log(response);
-        if (response.success) {
-            console.log(response);
-            const { result } = response
-            delete result.password
-            localStorage.setItem("RestuarentUser", JSON.stringify(result))
-            router.push("/restaurent/dashboard")
+        if (!email || !restaurantName || !confirmPassword || !password || !contact || !city || !address || !password) {
+            toast.error("All Fields are Required !", {
+                position: toast.POSITION.TOP_CENTER,
+                className: "toast-message",
+            });
+            return false
+        } else if (password !== confirmPassword) {
+            toast.error("Password and confirm do not match !", {
+                position: toast.POSITION.TOP_CENTER,
+                className: "toast-message",
+            });
+            return false
+
+        }
+
+        try {
+            let response = await fetch("http://localhost:3000/api/restaurents", {
+                method: "POST",
+                body: JSON.stringify({ email, password, confirmPassword, restaurantName, city, address, contact })
+            })
+            response = await response.json()
+           
+            if (response.success) {
+                console.log(response);
+                const { result } = response
+                delete result.password
+                localStorage.setItem("RestuarentUser", JSON.stringify(result))
+                router.push("/restaurent/dashboard")
+            }
+        } catch (error) {
+            toast.error("Something went wrong !", {
+                position: toast.POSITION.TOP_CENTER,
+                className: "toast-message",
+            });
         }
 
 
@@ -37,6 +65,7 @@ const SignUp = () => {
     }
     return (
         <div className='login-design-signup'>
+            <ToastContainer />
             <h1 style={{ marginBottom: "15px" }}>SignUp</h1>
             <div className='login-input'>
                 <input type='text' placeholder='Enter Restaurent Name' className='input-text' onChange={(e) => setRestaurantName(e.target.value)} />
