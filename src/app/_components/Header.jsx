@@ -45,7 +45,7 @@ const Header = () => {
                         details && details.restaurantName ?
                             <>
                                 <li style={{ textDecoration: "none", listStyle: "none", cursor: "pointer" }}>Profile</li>
-                                <button className='button-logout' onClick={() => logout()}>Logout</button>
+                                <button  style={{cursor:"pointer"}} className='button-logout' onClick={() => logout()}>Logout</button>
                             </>
                             : <li style={{ textDecoration: "none", listStyle: "none", cursor: "pointer" }}>SignUp/Login</li>
                     }
